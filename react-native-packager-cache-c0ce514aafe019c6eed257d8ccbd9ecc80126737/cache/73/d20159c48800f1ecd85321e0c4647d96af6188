@@ -1,0 +1,50 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = TextButton;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _colors = require('../utils/colors');
+
+function TextButton(_ref) {
+    var children = _ref.children,
+        onPress = _ref.onPress,
+        _ref$viewStyle = _ref.viewStyle,
+        viewStyle = _ref$viewStyle === undefined ? {} : _ref$viewStyle,
+        _ref$buttonColor = _ref.buttonColor,
+        buttonColor = _ref$buttonColor === undefined ? _colors.orange : _ref$buttonColor,
+        _ref$textColor = _ref.textColor,
+        textColor = _ref$textColor === undefined ? _colors.white : _ref$textColor,
+        _ref$style = _ref.style,
+        style = _ref$style === undefined ? {} : _ref$style;
+
+    return _react2.default.createElement(
+        _reactNative.View,
+        { style: [styles.container, { backgroundColor: buttonColor }, viewStyle] },
+        _react2.default.createElement(
+            _reactNative.TouchableOpacity,
+            { onPress: onPress },
+            _react2.default.createElement(
+                _reactNative.Text,
+                { style: [styles.reset, style, { color: textColor }] },
+                children
+            )
+        )
+    );
+}
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        borderRadius: 5,
+        justifyContent: 'center',
+        height: 40
+    },
+    reset: {
+        textAlign: 'center'
+    }
+});

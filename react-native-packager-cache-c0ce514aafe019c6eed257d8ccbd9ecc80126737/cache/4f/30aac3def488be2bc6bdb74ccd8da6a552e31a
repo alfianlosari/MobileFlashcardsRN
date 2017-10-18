@@ -1,0 +1,29 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = entries;
+
+var _actions = require('../actions');
+
+function entries() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    var action = arguments[1];
+
+    switch (action.type) {
+        case _actions.RECEIVE_DECKS:
+            return babelHelpers.extends({}, state, action.decks);
+
+        case _actions.RECEIVE_DECK:
+        case _actions.ADD_DECK:
+            return babelHelpers.extends({}, state, action.deck);
+
+        case _actions.ADD_CARD_TO_DECK:
+            return babelHelpers.extends({}, state, babelHelpers.defineProperty({}, action.deckId, babelHelpers.extends({}, state[action.deckId], {
+                questions: [].concat(babelHelpers.toConsumableArray(state[action.deckId].questions), [action.card])
+            })));
+
+        default:
+            return state;
+
+    }
+}

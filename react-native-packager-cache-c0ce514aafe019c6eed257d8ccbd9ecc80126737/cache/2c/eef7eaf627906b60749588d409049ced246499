@@ -1,0 +1,126 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _class, _temp2;
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactRedux = require('react-redux');
+
+var _api = require('../utils/api');
+
+var _actions = require('../actions');
+
+var _reactNavigation = require('react-navigation');
+
+var _TextButton = require('./TextButton');
+
+var _TextButton2 = babelHelpers.interopRequireDefault(_TextButton);
+
+var _colors = require('../utils/colors');
+
+var uuidv4 = require('uuid/v4');
+
+var AddCard = (_temp2 = _class = function (_Component) {
+    babelHelpers.inherits(AddCard, _Component);
+
+    function AddCard() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        babelHelpers.classCallCheck(this, AddCard);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = AddCard.__proto__ || Object.getPrototypeOf(AddCard)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            question: '',
+            answer: ''
+        }, _this.submitCard = function () {
+            var _this$state = _this.state,
+                question = _this$state.question,
+                answer = _this$state.answer;
+            var _this$props = _this.props,
+                dispatch = _this$props.dispatch,
+                navigation = _this$props.navigation;
+            var deckId = navigation.state.params.deckId;
+
+            if (question.length > 0 && answer.length > 0) {
+                var id = uuidv4();
+                var card = { id: id, question: question, answer: answer };
+                dispatch((0, _actions.addCardToDeck)(deckId, card));
+                (0, _api.saveCardToDeck)(deckId, card);
+                _this.toDeck();
+            }
+        }, _this.toDeck = function () {
+            _this.props.navigation.goBack();
+        }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }
+
+    babelHelpers.createClass(AddCard, [{
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                _reactNative.KeyboardAvoidingView,
+                { style: styles.container },
+                _react2.default.createElement(_reactNative.TextInput, {
+                    style: [styles.textField, { marginTop: 40 }],
+                    onChangeText: function onChangeText(question) {
+                        return _this2.setState({ question: question });
+                    },
+                    value: this.state.question,
+                    placeholder: 'Enter Question'
+                }),
+                _react2.default.createElement(_reactNative.TextInput, {
+                    style: styles.textField,
+                    onChangeText: function onChangeText(answer) {
+                        return _this2.setState({ answer: answer });
+                    },
+                    value: this.state.answer,
+                    placeholder: 'Enter Anwer'
+                }),
+                _react2.default.createElement(
+                    _TextButton2.default,
+                    { style: { margin: 20 }, buttonColor: _colors.black, onPress: this.submitCard },
+                    'Submit'
+                )
+            );
+        }
+    }]);
+    return AddCard;
+}(_react.Component), _class.navigationOptions = function (_ref2) {
+    var navigation = _ref2.navigation;
+
+    return {
+        title: 'Add Card'
+    };
+}, _temp2);
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    textField: {
+        height: 40, width: '80%', borderColor: 'gray', borderWidth: 1,
+        borderRadius: 5,
+        paddingLeft: 8,
+        paddingRight: 8,
+        marginBottom: 25,
+        borderColor: _colors.black
+    }
+});
+
+exports.default = (0, _reactRedux.connect)()(AddCard);

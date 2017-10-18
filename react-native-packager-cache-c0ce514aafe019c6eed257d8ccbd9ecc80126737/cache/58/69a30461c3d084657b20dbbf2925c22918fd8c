@@ -1,0 +1,221 @@
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = undefined;
+var _jsxFileName = '/Users/alfianlosari/Desktop/RN/MobileFlashcards/App.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactNavigation = require('react-navigation');
+
+var _reactRedux = require('react-redux');
+
+var _redux = require('redux');
+
+var _reducers = require('./reducers');
+
+var _reducers2 = babelHelpers.interopRequireDefault(_reducers);
+
+var _ListDeck = require('./components/ListDeck');
+
+var _ListDeck2 = babelHelpers.interopRequireDefault(_ListDeck);
+
+var _AddDeck = require('./components/AddDeck');
+
+var _AddDeck2 = babelHelpers.interopRequireDefault(_AddDeck);
+
+var _AddCard = require('./components/AddCard');
+
+var _AddCard2 = babelHelpers.interopRequireDefault(_AddCard);
+
+var _DeckDetail = require('./components/DeckDetail');
+
+var _DeckDetail2 = babelHelpers.interopRequireDefault(_DeckDetail);
+
+var _Quiz = require('./components/Quiz');
+
+var _Quiz2 = babelHelpers.interopRequireDefault(_Quiz);
+
+var _expo = require('expo');
+
+var _vectorIcons = require('@expo/vector-icons');
+
+var _colors = require('./utils/colors');
+
+var _helpers = require('./utils/helpers');
+
+function CustomStatusBar(_ref) {
+	var backgroundColor = _ref.backgroundColor,
+	    props = babelHelpers.objectWithoutProperties(_ref, ['backgroundColor']);
+
+	return _react2.default.createElement(
+		_reactNative.View,
+		{ style: { backgroundColor: backgroundColor, height: _expo.Constants.statusBarHeight }, __source: {
+				fileName: _jsxFileName,
+				lineNumber: 20
+			}
+		},
+		_react2.default.createElement(_reactNative.StatusBar, babelHelpers.extends({ translucent: true, backgroundColor: backgroundColor }, props, {
+			__source: {
+				fileName: _jsxFileName,
+				lineNumber: 21
+			}
+		}))
+	);
+}
+
+var Tabs = (0, _reactNavigation.TabNavigator)({
+	ListDeck: {
+		screen: _ListDeck2.default,
+		navigationOptions: {
+			tabBarLabel: 'Decks',
+			tabBarIcon: function tabBarIcon(_ref2) {
+				var tintColor = _ref2.tintColor;
+				return _react2.default.createElement(_vectorIcons.Ionicons, { name: 'ios-bookmarks', size: 30, color: tintColor, __source: {
+						fileName: _jsxFileName,
+						lineNumber: 34
+					}
+				});
+			}
+
+		}
+	},
+	AddDeck: {
+		screen: _AddDeck2.default,
+		navigationOptions: {
+			tabBarLabel: 'Add Deck',
+			tabBarIcon: function tabBarIcon(_ref3) {
+				var tintColor = _ref3.tintColor;
+				return _react2.default.createElement(_vectorIcons.FontAwesome, { name: 'plus-square', size: 30, color: tintColor, __source: {
+						fileName: _jsxFileName,
+						lineNumber: 42
+					}
+				});
+			}
+
+		}
+	}
+}, {
+	navigationOptions: {
+		header: null
+	},
+	tabBarOptions: {
+		activeTintColor: _reactNative.Platform.OS === 'ios' ? _colors.orange : _colors.white,
+		style: {
+			height: 56,
+			backgroundColor: _reactNative.Platform.OS === 'ios' ? _colors.white : _colors.orange,
+			shadowColor: 'rgba(0,0,0,0.24)',
+			shadowOffset: {
+				width: 0,
+				height: 3
+			},
+			shadowRadius: 6,
+			shadowOpacity: 1
+		}
+	}
+
+});
+
+var MainNavigator = (0, _reactNavigation.StackNavigator)({
+	Home: {
+		screen: Tabs,
+		navigationOptions: {
+			headerTintColor: _colors.white,
+			headerStyle: {
+				backgroundColor: _colors.orange
+			}
+		}
+	},
+	DeckDetail: {
+		screen: _DeckDetail2.default,
+		navigationOptions: {
+			headerTintColor: _colors.white,
+			headerStyle: {
+				backgroundColor: _colors.orange
+			}
+		}
+	},
+	AddCard: {
+		screen: _AddCard2.default,
+		navigationOptions: {
+			headerTintColor: _colors.white,
+			headerStyle: {
+				backgroundColor: _colors.orange
+			}
+		}
+	},
+	Quiz: {
+		screen: _Quiz2.default,
+		navigationOptions: {
+			headerTintColor: _colors.white,
+			headerStyle: {
+				backgroundColor: _colors.orange
+			}
+		}
+	}
+});
+
+var App = function (_React$Component) {
+	babelHelpers.inherits(App, _React$Component);
+
+	function App() {
+		babelHelpers.classCallCheck(this, App);
+		return babelHelpers.possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+	}
+
+	babelHelpers.createClass(App, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+
+			(0, _helpers.setLocalNotification)();
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			return _react2.default.createElement(
+				_reactRedux.Provider,
+				{ store: (0, _redux.createStore)(_reducers2.default), __source: {
+						fileName: _jsxFileName,
+						lineNumber: 116
+					}
+				},
+				_react2.default.createElement(
+					_reactNative.View,
+					{ style: { flex: 1 }, __source: {
+							fileName: _jsxFileName,
+							lineNumber: 117
+						}
+					},
+					_react2.default.createElement(CustomStatusBar, { backgroundColor: '#f26f28', barStyle: 'light-content', __source: {
+							fileName: _jsxFileName,
+							lineNumber: 118
+						}
+					}),
+					_react2.default.createElement(MainNavigator, {
+						__source: {
+							fileName: _jsxFileName,
+							lineNumber: 119
+						}
+					})
+				)
+			);
+		}
+	}]);
+	return App;
+}(_react2.default.Component);
+
+exports.default = App;
+
+
+var styles = _reactNative.StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center'
+	}
+});

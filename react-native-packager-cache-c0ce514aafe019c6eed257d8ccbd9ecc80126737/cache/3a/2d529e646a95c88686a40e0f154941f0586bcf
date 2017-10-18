@@ -1,0 +1,146 @@
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _class,
+    _temp2,
+    _jsxFileName = '/Users/alfianlosari/Desktop/RN/MobileFlashcards/components/DeckDetail.js';
+
+var _react = require('react');
+
+var _react2 = babelHelpers.interopRequireDefault(_react);
+
+var _reactNative = require('react-native');
+
+var _reactRedux = require('react-redux');
+
+var _reactNavigation = require('react-navigation');
+
+var _TextButton = require('./TextButton');
+
+var _TextButton2 = babelHelpers.interopRequireDefault(_TextButton);
+
+var _colors = require('../utils/colors');
+
+var DeckDetail = (_temp2 = _class = function (_Component) {
+    babelHelpers.inherits(DeckDetail, _Component);
+
+    function DeckDetail() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        babelHelpers.classCallCheck(this, DeckDetail);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = babelHelpers.possibleConstructorReturn(this, (_ref = DeckDetail.__proto__ || Object.getPrototypeOf(DeckDetail)).call.apply(_ref, [this].concat(args))), _this), _this.addCard = function () {
+            var navigation = _this.props.navigation;
+            var deckId = navigation.state.params.deckId;
+
+            navigation.navigate('AddCard', { deckId: deckId });
+        }, _this.startQuiz = function () {
+            var navigation = _this.props.navigation;
+            var deckId = navigation.state.params.deckId;
+
+            navigation.navigate('Quiz', { deckId: deckId });
+        }, _temp), babelHelpers.possibleConstructorReturn(_this, _ret);
+    }
+
+    babelHelpers.createClass(DeckDetail, [{
+        key: 'render',
+        value: function render() {
+            var deck = this.props.deck;
+
+            return _react2.default.createElement(
+                _reactNative.ScrollView,
+                { contentContainerStyle: styles.container, __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 32
+                    }
+                },
+                _react2.default.createElement(
+                    _reactNative.View,
+                    { style: styles.deckView, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 33
+                        }
+                    },
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: { fontSize: 36 }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 34
+                            }
+                        },
+                        deck.title
+                    ),
+                    _react2.default.createElement(
+                        _reactNative.Text,
+                        { style: { fontSize: 27, color: '#c0c0c0' }, __source: {
+                                fileName: _jsxFileName,
+                                lineNumber: 35
+                            }
+                        },
+                        deck.questions.length,
+                        ' cards'
+                    )
+                ),
+                _react2.default.createElement(
+                    _TextButton2.default,
+                    { style: { margin: 20 }, buttonColor: _colors.white, textColor: _colors.black, viewStyle: { marginBottom: 10, borderWidth: 1 }, onPress: this.addCard, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 38
+                        }
+                    },
+                    'Add Card'
+                ),
+                _react2.default.createElement(
+                    _TextButton2.default,
+                    { style: { margin: 20 }, buttonColor: _colors.black, textColor: _colors.white, onPress: this.startQuiz, __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 42
+                        }
+                    },
+                    'Start Quiz'
+                )
+            );
+        }
+    }]);
+    return DeckDetail;
+}(_react.Component), _class.navigationOptions = function (_ref2) {
+    var navigation = _ref2.navigation;
+    var title = navigation.state.params.title;
+
+    return {
+        title: title
+    };
+}, _temp2);
+
+
+var styles = _reactNative.StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    deckView: {
+        alignItems: 'center',
+        paddingTop: 100,
+        paddingBottom: 100
+    }
+});
+
+function mapStateToProps(decks, _ref3) {
+    var navigation = _ref3.navigation;
+    var deckId = navigation.state.params.deckId;
+
+    return {
+        deck: decks[deckId]
+    };
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(DeckDetail);
