@@ -34,9 +34,9 @@ export function setLocalNotification() {
                         if (status === 'granted' || status == 'undetermined') {
                             Notifications.cancelAllScheduledNotificationsAsync()
                             let tommorow = new Date();
-                            tommorow.setDate(tommorow.getDate());
-                            tommorow.setHours(19);
-                            tommorow.setMinutes(58);
+                            tommorow.setDate(tommorow.getDate() + 1);
+                            tommorow.setHours(8);
+                            tommorow.setMinutes(0);
                             tommorow.setho
                             Notifications.scheduleLocalNotificationAsync(createNotification(),
                             {
