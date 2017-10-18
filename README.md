@@ -10,6 +10,9 @@
 #### Installation
 1. Run npm install to install all the dependencies in your machine
 2. Run npm start to run the project
+3. Run on iOS Simulator by pressing i
+4. Run on iOS Device by downloading Expo app on the App Store, and scan qr code displayed in the command line
+5. Run on Android Device/Emulator by pressing a
 
 #### Usage
 1. There are 2 tabs, List Deck View which lists all the decks created, and Create Deck View where user can enter title to create new deck
